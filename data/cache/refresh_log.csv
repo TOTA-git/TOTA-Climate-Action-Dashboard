@@ -1,6 +1,6 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-03 21:52:20,success,7,NA
-drought_hist,2026-11-03 21:52:21,success,175,NA
-wildfire,2026-11-03 21:52:23,failure,NA,"Can't select columns that don't exist.
+drought,2026-11-03 21:56:51,success,7,NA
+drought_hist,2026-11-03 21:56:52,success,175,NA
+wildfire,2026-11-03 21:57:12,failure,NA,"Can't select columns that don't exist.
 ✖ Column `Description` doesn't exist."
-temperature,2026-11-03 21:52:35,success,20216,NA
+temperature,2026-11-03 21:57:26,success,20216,NA
