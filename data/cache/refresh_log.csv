@@ -1,5 +1,6 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-03 17:23:37,success,7,NA
-drought_hist,2026-11-03 17:23:38,success,175,NA
-wildfire,2026-11-03 17:24:00,success,819,NA
-temperature,2026-11-03 17:24:53,success,20216,NA
+drought,2026-11-03 18:08:47,success,7,NA
+drought_hist,2026-11-03 18:08:48,success,175,NA
+wildfire,2026-11-03 18:08:50,failure,NA,"Can't select columns that don't exist.
+✖ Column `Description` doesn't exist."
+temperature,2026-11-03 18:08:50,failure,NA,"The package ""lutz"" is required to add timezones to stations ata."
