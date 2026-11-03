@@ -1,0 +1,176 @@
+BasinName,Start_Date,DroughtLevel
+Kettle River,2025-05-15,6
+Kettle River,2025-05-22,6
+Kettle River,2025-05-29,1
+Kettle River,2025-06-05,0
+Kettle River,2025-06-12,2
+Kettle River,2025-06-19,2
+Kettle River,2025-06-26,2
+Kettle River,2025-07-03,2
+Kettle River,2025-07-10,3
+Kettle River,2025-07-17,3
+Kettle River,2025-07-24,3
+Kettle River,2025-07-31,2
+Kettle River,2025-08-07,2
+Kettle River,2025-08-14,1
+Kettle River,2025-08-21,1
+Kettle River,2025-08-28,1
+Kettle River,2025-09-04,2
+Kettle River,2025-09-11,2
+Kettle River,2025-09-18,2
+Kettle River,2025-09-25,3
+Kettle River,2025-10-02,3
+Kettle River,2025-10-09,3
+Kettle River,2025-10-16,3
+Kettle River,2025-10-23,3
+Kettle River,2025-10-30,2
+Lower Thompson,2025-05-15,6
+Lower Thompson,2025-05-22,2
+Lower Thompson,2025-05-29,2
+Lower Thompson,2025-06-05,2
+Lower Thompson,2025-06-12,3
+Lower Thompson,2025-06-19,2
+Lower Thompson,2025-06-26,2
+Lower Thompson,2025-07-03,2
+Lower Thompson,2025-07-10,2
+Lower Thompson,2025-07-17,2
+Lower Thompson,2025-07-24,1
+Lower Thompson,2025-07-31,1
+Lower Thompson,2025-08-07,1
+Lower Thompson,2025-08-14,0
+Lower Thompson,2025-08-21,0
+Lower Thompson,2025-08-28,0
+Lower Thompson,2025-09-04,1
+Lower Thompson,2025-09-11,1
+Lower Thompson,2025-09-18,2
+Lower Thompson,2025-09-25,2
+Lower Thompson,2025-10-02,2
+Lower Thompson,2025-10-09,2
+Lower Thompson,2025-10-16,1
+Lower Thompson,2025-10-23,2
+Lower Thompson,2025-10-30,1
+Nicola,2025-05-15,6
+Nicola,2025-05-22,1
+Nicola,2025-05-29,2
+Nicola,2025-06-05,2
+Nicola,2025-06-12,2
+Nicola,2025-06-19,1
+Nicola,2025-06-26,2
+Nicola,2025-07-03,2
+Nicola,2025-07-10,3
+Nicola,2025-07-17,3
+Nicola,2025-07-24,3
+Nicola,2025-07-31,3
+Nicola,2025-08-07,3
+Nicola,2025-08-14,3
+Nicola,2025-08-21,3
+Nicola,2025-08-28,3
+Nicola,2025-09-04,3
+Nicola,2025-09-11,3
+Nicola,2025-09-18,3
+Nicola,2025-09-25,4
+Nicola,2025-10-02,4
+Nicola,2025-10-09,3
+Nicola,2025-10-16,3
+Nicola,2025-10-23,3
+Nicola,2025-10-30,2
+North Thompson,2025-05-15,6
+North Thompson,2025-05-22,6
+North Thompson,2025-05-29,6
+North Thompson,2025-06-05,0
+North Thompson,2025-06-12,1
+North Thompson,2025-06-19,1
+North Thompson,2025-06-26,2
+North Thompson,2025-07-03,2
+North Thompson,2025-07-10,2
+North Thompson,2025-07-17,2
+North Thompson,2025-07-24,1
+North Thompson,2025-07-31,1
+North Thompson,2025-08-07,1
+North Thompson,2025-08-14,1
+North Thompson,2025-08-21,0
+North Thompson,2025-08-28,0
+North Thompson,2025-09-04,1
+North Thompson,2025-09-11,2
+North Thompson,2025-09-18,2
+North Thompson,2025-09-25,3
+North Thompson,2025-10-02,3
+North Thompson,2025-10-09,2
+North Thompson,2025-10-16,2
+North Thompson,2025-10-23,2
+North Thompson,2025-10-30,2
+Okanagan,2025-05-15,6
+Okanagan,2025-05-22,1
+Okanagan,2025-05-29,1
+Okanagan,2025-06-05,1
+Okanagan,2025-06-12,2
+Okanagan,2025-06-19,2
+Okanagan,2025-06-26,2
+Okanagan,2025-07-03,2
+Okanagan,2025-07-10,3
+Okanagan,2025-07-17,3
+Okanagan,2025-07-24,2
+Okanagan,2025-07-31,1
+Okanagan,2025-08-07,1
+Okanagan,2025-08-14,1
+Okanagan,2025-08-21,0
+Okanagan,2025-08-28,1
+Okanagan,2025-09-04,2
+Okanagan,2025-09-11,3
+Okanagan,2025-09-18,3
+Okanagan,2025-09-25,3
+Okanagan,2025-10-02,3
+Okanagan,2025-10-09,4
+Okanagan,2025-10-16,3
+Okanagan,2025-10-23,3
+Okanagan,2025-10-30,2
+Similkameen,2025-05-15,6
+Similkameen,2025-05-22,1
+Similkameen,2025-05-29,2
+Similkameen,2025-06-05,2
+Similkameen,2025-06-12,2
+Similkameen,2025-06-19,3
+Similkameen,2025-06-26,3
+Similkameen,2025-07-03,3
+Similkameen,2025-07-10,3
+Similkameen,2025-07-17,4
+Similkameen,2025-07-24,4
+Similkameen,2025-07-31,4
+Similkameen,2025-08-07,4
+Similkameen,2025-08-14,4
+Similkameen,2025-08-21,4
+Similkameen,2025-08-28,4
+Similkameen,2025-09-04,4
+Similkameen,2025-09-11,4
+Similkameen,2025-09-18,4
+Similkameen,2025-09-25,4
+Similkameen,2025-10-02,4
+Similkameen,2025-10-09,4
+Similkameen,2025-10-16,4
+Similkameen,2025-10-23,3
+Similkameen,2025-10-30,2
+South Thompson,2025-05-15,6
+South Thompson,2025-05-22,6
+South Thompson,2025-05-29,6
+South Thompson,2025-06-05,0
+South Thompson,2025-06-12,1
+South Thompson,2025-06-19,1
+South Thompson,2025-06-26,1
+South Thompson,2025-07-03,1
+South Thompson,2025-07-10,2
+South Thompson,2025-07-17,1
+South Thompson,2025-07-24,1
+South Thompson,2025-07-31,1
+South Thompson,2025-08-07,1
+South Thompson,2025-08-14,0
+South Thompson,2025-08-21,0
+South Thompson,2025-08-28,0
+South Thompson,2025-09-04,1
+South Thompson,2025-09-11,1
+South Thompson,2025-09-18,2
+South Thompson,2025-09-25,2
+South Thompson,2025-10-02,3
+South Thompson,2025-10-09,2
+South Thompson,2025-10-16,2
+South Thompson,2025-10-23,2
+South Thompson,2025-10-30,2
