@@ -121,7 +121,9 @@ refresh_dataset(
     points <- files |>
       filter(grepl("^BC Fire Points .*\\.kmz$", name, ignore.case = TRUE))
     
-    print(points$name)
+    if (nrow(points) == 0) {
+      stop("No BC Fire Points KMZ files found.")
+    }
     
     # 3. Download and read each file
     dir.create("data/cache/wildfires", recursive = TRUE, showWarnings = FALSE)
@@ -177,30 +179,38 @@ refresh_dataset(
       .predicate = st_intersects
     )
     
-    # 5. Extract Description fields only if available
-    if ("Description" %in% names(wildfires_TO)) {
-      
-      wildfire_details <- map_dfr(seq_len(nrow(wildfires_TO)), function(i) {
+    if (!"Description" %in% names(wildfires_TO)) {
+      stop("KMZ files do not contain a Description field.")
+    }
+    
+    wildfire_details <- map_dfr(
+      seq_len(nrow(wildfires_TO)),
+      function(i) {
         
         x <- wildfires_TO$Description[i]
         
         if (is.na(x) || !nzchar(x)) {
-          return(tibble(.rows = 1))
+          return(tibble())
         }
         
         rows <- read_html(x) |>
-          html_elements("table table tr")
+          html_elements("tr")
         
         details <- map_dfr(rows, function(row) {
-          cells <- html_elements(row, "td") |> html_text2()
+          
+          cells <- html_elements(row, "td") |>
+            html_text2()
           
           if (length(cells) == 2) {
-            tibble(field = cells[1], value = cells[2])
+            tibble(
+              field = cells[1],
+              value = cells[2]
+            )
           }
         })
         
         if (nrow(details) == 0) {
-          return(tibble(.rows = 1))
+          return(tibble())
         }
         
         details |>
@@ -209,37 +219,62 @@ refresh_dataset(
             values_from = value,
             values_fn = first
           )
-      })
-      
-      # Avoid duplicate columns
-      detail_cols <- setdiff(
-        names(wildfire_details),
-        names(wildfires_TO)
-      )
-      
-      wildfires_clean <- bind_cols(
-        wildfires_TO |> select(-Description),
-        wildfire_details |> select(all_of(detail_cols))
-      )
-      
-    } else {
-      message("No Description column found. Using existing KMZ attributes.")
-      wildfires_clean <- wildfires_TO
-    }
-    
-      wildfires_clean <- wildfires_clean |>
-        mutate(
-          WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR),
-          FIRE_SIZE_HA = as.numeric(FIRE_SIZE_HA),
-          LATITUDE = as.numeric(LATITUDE),
-          LONGITUDE = as.numeric(LONGITUDE),
-            `IGNITION DATE` = as.POSIXct(
-            `IGNITION DATE`,
-            format = "%Y-%m-%d %I:%M:%S %p",
-            tz = "America/Vancouver"
-        )
+      }
     )
     
+    # 7. Combine spatial data and extracted attributes
+    if (nrow(wildfire_details) != nrow(wildfires_TO)) {
+      stop("Wildfire detail extraction produced an unexpected number of rows.")
+    }
+    
+    detail_cols <- setdiff(
+      names(wildfire_details),
+      names(wildfires_TO)
+    )
+    
+    wildfires_clean <- bind_cols(
+      wildfires_TO |> select(-Description),
+      wildfire_details |> select(all_of(detail_cols))
+    )
+    
+    # 8. Check required fields
+    required_fields <- c(
+      "WILDFIRE_YEAR",
+      "FIRE_SIZE_HA",
+      "IGNITION DATE",
+      "LATITUDE",
+      "LONGITUDE"
+    )
+    
+    missing_fields <- setdiff(
+      required_fields,
+      names(wildfires_clean)
+    )
+    
+    if (length(missing_fields) > 0) {
+      stop(
+        "Missing wildfire fields: ",
+        paste(missing_fields, collapse = ", ")
+      )
+    }
+    
+    # 9. Standardize data types
+    wildfires_clean <- wildfires_clean |>
+      mutate(
+        WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR),
+        FIRE_SIZE_HA = as.numeric(FIRE_SIZE_HA),
+        LATITUDE = as.numeric(LATITUDE),
+        LONGITUDE = as.numeric(LONGITUDE),
+        `IGNITION DATE` = as.POSIXct(
+          `IGNITION DATE`,
+          format = "%Y-%m-%d %I:%M:%S %p",
+          tz = "America/Vancouver"
+        )
+      )
+    
+    message("Successfully processed ", nrow(wildfires_clean), " wildfires.")
+    
+    wildfires_clean
   },
   function(df) atomic_write_rds(df, file.path(CACHE_DIR, "wildfire.rds"))
 )
