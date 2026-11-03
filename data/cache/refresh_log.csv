@@ -1,5 +1,6 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-03 20:28:58,success,7,NA
-drought_hist,2026-11-03 20:28:59,success,175,NA
-wildfire,2026-11-03 20:28:59,failure,NA,HTTP 503 Service Unavailable.
-temperature,2026-11-03 20:29:11,success,20216,NA
+drought,2026-11-03 21:52:20,success,7,NA
+drought_hist,2026-11-03 21:52:21,success,175,NA
+wildfire,2026-11-03 21:52:23,failure,NA,"Can't select columns that don't exist.
+✖ Column `Description` doesn't exist."
+temperature,2026-11-03 21:52:35,success,20216,NA
