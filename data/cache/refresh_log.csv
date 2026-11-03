@@ -1,7 +1,5 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-03 18:30:49,success,7,NA
-drought_hist,2026-11-03 18:30:50,success,175,NA
-wildfire,2026-11-03 18:30:52,failure,NA,"ℹ In argument: `WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR)`.
-Caused by error:
-! object 'WILDFIRE_YEAR' not found"
-temperature,2026-11-03 18:31:06,success,20216,NA
+drought,2026-11-03 18:51:30,success,7,NA
+drought_hist,2026-11-03 18:51:31,success,175,NA
+wildfire,2026-11-03 18:51:33,failure,NA,KMZ files do not contain a Description field.
+temperature,2026-11-03 18:51:49,success,20216,NA
