@@ -159,7 +159,15 @@ refresh_dataset(
       
       if (length(kml) == 0) stop("No KML found in ", file_name)
       
-      st_read(kml[1], quiet = TRUE)
+      df <- st_read(kml[1], quiet = TRUE)
+
+      message("File: ", file_name)
+      message("GDAL version: ", sf::sf_extSoftVersion()["GDAL"])
+      message("Columns: ", paste(names(df), collapse = ", "))
+      
+      print(head(df, 1))
+      
+      df
     })
     
     # 4. Combine all point files
