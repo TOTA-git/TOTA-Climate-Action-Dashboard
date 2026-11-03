@@ -159,15 +159,7 @@ refresh_dataset(
       
       if (length(kml) == 0) stop("No KML found in ", file_name)
       
-      df <- st_read(kml[1], quiet = TRUE)
-
-      message("File: ", file_name)
-      message("GDAL version: ", sf::sf_extSoftVersion()["GDAL"])
-      message("Columns: ", paste(names(df), collapse = ", "))
-      
-      print(head(df, 1))
-      
-      df
+      st_read(kml[1], quiet = TRUE)
     })
     
     # 4. Combine all point files
@@ -186,7 +178,7 @@ refresh_dataset(
       .predicate = st_intersects
     )
     
-    wildfire_details <- map_dfr(wildfires_TO$Description, \(x) {
+    wildfire_details <- map_dfr(wildfires_TO$description, \(x) {
       rows <- read_html(x) |>
         html_elements("table table tr")
       
