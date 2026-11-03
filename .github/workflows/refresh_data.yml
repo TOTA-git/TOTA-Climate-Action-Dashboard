@@ -31,7 +31,7 @@ jobs:
       # Install R package dependencies
       - name: Install R Package Dependencies
         run: |
-          Rscript -e 'install.packages(c("httr", "jsonlite", "readr", "dplyr", "tidyr", "lubridate", "sf", "geojsonsf", "rvest", "httr2", "stringr", "purrr"))'
+          Rscript -e 'install.packages(c("httr", "jsonlite", "readr", "dplyr", "tidyr", "lubridate", "sf", "geojsonsf", "rvest", "httr2", "stringr", "purrr", "lutz"))'
           Rscript -e 'install.packages("weathercan", repos = c("https://ropensci.r-universe.dev", "https://cloud.r-project.org"))'
 
       # Run data refresh script
