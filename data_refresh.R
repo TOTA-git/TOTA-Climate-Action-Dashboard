@@ -28,6 +28,7 @@ library(stringr)
 library(purrr)
 library(weathercan)
 library(lutz)
+library(readxl)
 
 source("R/data_helpers.R")
 
@@ -121,9 +122,7 @@ refresh_dataset(
     points <- files |>
       filter(grepl("^BC Fire Points .*\\.kmz$", name, ignore.case = TRUE))
     
-    if (nrow(points) == 0) {
-      stop("No BC Fire Points KMZ files found.")
-    }
+    print(points$name)
     
     # 3. Download and read each file
     dir.create("data/cache/wildfires", recursive = TRUE, showWarnings = FALSE)
@@ -160,16 +159,7 @@ refresh_dataset(
       
       if (length(kml) == 0) stop("No KML found in ", file_name)
       
-      df <- st_read(kml[1], quiet = TRUE)
-      
-      message(file_name, ": ", paste(names(df), collapse = ", "))
-      
-      # Ensure Description always exists
-      if (!"Description" %in% names(df)) {
-        df$Description <- NA_character_
-      }
-      
-      df
+      st_read(kml[1], quiet = TRUE)
     })
     
     # 4. Combine all point files
@@ -181,89 +171,32 @@ refresh_dataset(
       quiet = TRUE
     ) |>
       st_transform(st_crs(wildfires))
-
+    
     wildfires_TO <- st_filter(
       wildfires,
       boundary,
       .predicate = st_intersects
     )
     
-    wildfire_details <- map_dfr(
-      seq_len(nrow(wildfires_TO)),
-      function(i) {
+    wildfire_details <- map_dfr(wildfires_TO$Description, \(x) {
+      rows <- read_html(x) |>
+        html_elements("table table tr")
+      
+      map_dfr(rows, \(row) {
+        cells <- html_elements(row, "td") |> html_text2()
         
-        x <- wildfires_TO$Description[i]
-        
-        if (is.na(x) || !nzchar(x)) {
-          return(tibble(.rows = 1))
+        if (length(cells) == 2) {
+          tibble(field = cells[1], value = cells[2])
         }
-        
-        rows <- read_html(x) |>
-          html_elements("tr")
-        
-        details <- map_dfr(rows, function(row) {
-          
-          cells <- html_elements(row, "td") |>
-            html_text2()
-          
-          if (length(cells) == 2) {
-            tibble(
-              field = cells[1],
-              value = cells[2]
-            )
-          }
-        })
-        
-        if (nrow(details) == 0) {
-          return(tibble())
-        }
-        
-        details |>
-          pivot_wider(
-            names_from = field,
-            values_from = value,
-            values_fn = first
-          )
-      }
-    )
-    
-    # 7. Combine spatial data and extracted attributes
-    if (nrow(wildfire_details) != nrow(wildfires_TO)) {
-      stop("Wildfire detail extraction produced an unexpected number of rows.")
-    }
-    
-    detail_cols <- setdiff(
-      names(wildfire_details),
-      names(wildfires_TO)
-    )
+      }) |>
+        pivot_wider(names_from = field, values_from = value)
+    })
     
     wildfires_clean <- bind_cols(
       wildfires_TO |> select(-Description),
-      wildfire_details |> select(all_of(detail_cols))
+      wildfire_details
     )
     
-    # 8. Check required fields
-    required_fields <- c(
-      "WILDFIRE_YEAR",
-      "FIRE_SIZE_HA",
-      "IGNITION DATE",
-      "LATITUDE",
-      "LONGITUDE"
-    )
-    
-    missing_fields <- setdiff(
-      required_fields,
-      names(wildfires_clean)
-    )
-    
-    if (length(missing_fields) > 0) {
-      stop(
-        "Missing wildfire fields: ",
-        paste(missing_fields, collapse = ", ")
-      )
-    }
-    
-    # 9. Standardize data types
     wildfires_clean <- wildfires_clean |>
       mutate(
         WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR),
@@ -276,10 +209,6 @@ refresh_dataset(
           tz = "America/Vancouver"
         )
       )
-    
-    message("Successfully processed ", nrow(wildfires_clean), " wildfires.")
-    
-    wildfires_clean
   },
   function(df) atomic_write_rds(df, file.path(CACHE_DIR, "wildfire.rds"))
 )
