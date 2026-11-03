@@ -102,7 +102,7 @@ ui <- dashboardPage(
       menuItem("Overview", tabName = "overview", icon = icon("readme")),
       # menuItem("Ev Charging", tabName = "ev", icon = icon("charging-station")),
       menuItem("Temperature", tabName= "temperature", icon = icon("temperature-high")),
-      menuItem("Wild Fires", tabName = "fire", icon = icon("fire-flame-curved")),
+      menuItem("Wildfires", tabName = "fire", icon = icon("fire-flame-curved")),
       menuItem("Drought", tabName = "drought", icon = icon("droplet-slash")),
       menuItem("Back to Hub", tabName = NULL, icon = icon("globe"), href = "https://tota-insto-hub.share.connect.posit.cloud/", newtab = FALSE)
     ),

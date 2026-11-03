@@ -27,6 +27,7 @@ library(httr2)
 library(stringr)
 library(purrr)
 library(weathercan)
+library(lutz)
 
 source("R/data_helpers.R")
 
@@ -176,37 +177,69 @@ refresh_dataset(
       .predicate = st_intersects
     )
     
-    wildfire_details <- map_dfr(wildfires_TO$Description, \(x) {
-      rows <- read_html(x) |>
-        html_elements("table table tr")
+    # 5. Extract Description fields only if available
+    if ("Description" %in% names(wildfires_TO)) {
       
-      map_dfr(rows, \(row) {
-        cells <- html_elements(row, "td") |> html_text2()
+      wildfire_details <- map_dfr(seq_len(nrow(wildfires_TO)), function(i) {
         
-        if (length(cells) == 2) {
-          tibble(field = cells[1], value = cells[2])
+        x <- wildfires_TO$Description[i]
+        
+        if (is.na(x) || !nzchar(x)) {
+          return(tibble(.rows = 1))
         }
-      }) |>
-        pivot_wider(names_from = field, values_from = value)
-    })
+        
+        rows <- read_html(x) |>
+          html_elements("table table tr")
+        
+        details <- map_dfr(rows, function(row) {
+          cells <- html_elements(row, "td") |> html_text2()
+          
+          if (length(cells) == 2) {
+            tibble(field = cells[1], value = cells[2])
+          }
+        })
+        
+        if (nrow(details) == 0) {
+          return(tibble(.rows = 1))
+        }
+        
+        details |>
+          pivot_wider(
+            names_from = field,
+            values_from = value,
+            values_fn = first
+          )
+      })
+      
+      # Avoid duplicate columns
+      detail_cols <- setdiff(
+        names(wildfire_details),
+        names(wildfires_TO)
+      )
+      
+      wildfires_clean <- bind_cols(
+        wildfires_TO |> select(-Description),
+        wildfire_details |> select(all_of(detail_cols))
+      )
+      
+    } else {
+      message("No Description column found. Using existing KMZ attributes.")
+      wildfires_clean <- wildfires_TO
+    }
     
-    wildfires_clean <- bind_cols(
-      wildfires_TO |> select(-Description),
-      wildfire_details
+      wildfires_clean <- wildfires_clean |>
+        mutate(
+          WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR),
+          FIRE_SIZE_HA = as.numeric(FIRE_SIZE_HA),
+          LATITUDE = as.numeric(LATITUDE),
+          LONGITUDE = as.numeric(LONGITUDE),
+            `IGNITION DATE` = as.POSIXct(
+            `IGNITION DATE`,
+            format = "%Y-%m-%d %I:%M:%S %p",
+            tz = "America/Vancouver"
+        )
     )
     
-    wildfires_clean <- wildfires_clean |>
-      mutate(
-        WILDFIRE_YEAR = as.integer(WILDFIRE_YEAR),
-        FIRE_SIZE_HA = as.numeric(FIRE_SIZE_HA),
-        LATITUDE = as.numeric(LATITUDE),
-        LONGITUDE = as.numeric(LONGITUDE),
-        `IGNITION DATE` = as.POSIXct(
-          `IGNITION DATE`,
-          format = "%Y-%m-%d %I:%M:%S %p",
-          tz = "America/Vancouver"
-        )
-      )
   },
   function(df) atomic_write_rds(df, file.path(CACHE_DIR, "wildfire.rds"))
 )
