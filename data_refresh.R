@@ -193,7 +193,7 @@ refresh_dataset(
     })
     
     wildfires_clean <- bind_cols(
-      wildfires_TO |> select(-Description),
+      wildfires_TO |> select(-description),
       wildfire_details
     )
     
