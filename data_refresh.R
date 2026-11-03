@@ -160,7 +160,16 @@ refresh_dataset(
       
       if (length(kml) == 0) stop("No KML found in ", file_name)
       
-      st_read(kml[1], quiet = TRUE)
+      df <- st_read(kml[1], quiet = TRUE)
+      
+      message(file_name, ": ", paste(names(df), collapse = ", "))
+      
+      # Ensure Description always exists
+      if (!"Description" %in% names(df)) {
+        df$Description <- NA_character_
+      }
+      
+      df
     })
     
     # 4. Combine all point files
@@ -179,10 +188,6 @@ refresh_dataset(
       .predicate = st_intersects
     )
     
-    if (!"Description" %in% names(wildfires_TO)) {
-      stop("KMZ files do not contain a Description field.")
-    }
-    
     wildfire_details <- map_dfr(
       seq_len(nrow(wildfires_TO)),
       function(i) {
@@ -190,7 +195,7 @@ refresh_dataset(
         x <- wildfires_TO$Description[i]
         
         if (is.na(x) || !nzchar(x)) {
-          return(tibble())
+          return(tibble(.rows = 1))
         }
         
         rows <- read_html(x) |>
