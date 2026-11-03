@@ -1,8 +1,5 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-03 20:15:22,success,7,NA
-drought_hist,2026-11-03 20:15:24,success,175,NA
-wildfire,2026-11-03 20:15:26,failure,NA,"Missing wildfire fields: WILDFIRE_YEAR, FIRE_SIZE_HA, IGNITION DATE, LATITUDE, LONGITUDE"
-temperature,2026-11-03 20:15:36,failure,NA,"Failed to perform HTTP request.
-Caused by error in `curl::curl_fetch_memory()`:
-! Timeout was reached [collaboration.cmc.ec.gc.ca]:
-Failed to connect to collaboration.cmc.ec.gc.ca port 443 after 10002 ms: Timeout was reached"
+drought,2026-11-03 20:28:58,success,7,NA
+drought_hist,2026-11-03 20:28:59,success,175,NA
+wildfire,2026-11-03 20:28:59,failure,NA,HTTP 503 Service Unavailable.
+temperature,2026-11-03 20:29:11,success,20216,NA
