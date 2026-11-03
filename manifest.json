@@ -824,7 +824,7 @@
     },
     "crul": {
       "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": "https://ropensci.r-universe.dev",
       "description": {
         "Package": "crul",
         "Title": "HTTP Client",
@@ -3917,8 +3917,8 @@
       }
     },
     "weathercan": {
-      "Source": "https://ropensci.r-universe.dev",
-      "Repository": null,
+      "Source": "ropensci",
+      "Repository": "https://ropensci.r-universe.dev",
       "description": {
         "Package": "weathercan",
         "Type": "Package",
@@ -4157,6 +4157,9 @@
     }
   },
   "files": {
+    ".Renviron": {
+      "checksum": "ffc80c883464fb022c89d1ca0cb55ac7"
+    },
     "app.R": {
       "checksum": "a1746285bbbbee90d50611352ce61f7a"
     },
@@ -4167,10 +4170,10 @@
       "checksum": "3cebec554981a5c071fd7a4cd2504e53"
     },
     "data/cache/refresh_log.csv": {
-      "checksum": "6b08228e43ab22d4f897a717fc83b78c"
+      "checksum": "16239320422a0493bdf1a111ef02ba3a"
     },
     "data/cache/temperature.csv": {
-      "checksum": "b245f83abb4caf3de0d473608e6f9ecf"
+      "checksum": "c1ecffa82ae5f6de723dc17a13242224"
     },
     "data/cache/wildfire.rds": {
       "checksum": "8ee8a4ac4cf2aba3e3b3fa2a173105ea"
