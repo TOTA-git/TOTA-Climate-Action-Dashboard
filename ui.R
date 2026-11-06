@@ -1,5 +1,5 @@
-#UI FOR CLIMATE ACTION SHINY DASHBOARD==============================================================================
-#THEME ----------------------------------------------------------------------------------------------------------
+#UI FOR CLIMATE ACTION SHINY DASHBOARD============================================================================
+#THEME -----------------------------------------------------------------------------------------------------------
 TOTA_theme <- create_theme( #Set colours
   adminlte_color(
     light_blue = "#004B55",
@@ -77,7 +77,7 @@ footer_TOTA <- tags$footer(
   style = "position: relative; bottom: 0; left: 0; width: 100%; z-index: 9999;"
 )
 
-#HEADER -----------------------------------------------------------------------------------------------------------
+#HEADER ----------------------------------------------------------------------------------------------------------
 ui <- dashboardPage(
   dashboardHeader(
     title = "Climate Action Dashboard",
@@ -95,7 +95,7 @@ ui <- dashboardPage(
       )
     )             
   ),
-#SIDE BAR / NAV ---------------------------------------------------------------------------------------------------
+#SIDE BAR / NAV --------------------------------------------------------------------------------------------------
   dashboardSidebar(
     sidebarMenu(
       id = "tabs",
@@ -120,7 +120,7 @@ ui <- dashboardPage(
     )
   ),
 
-#OVERVIEW TAB----------------------------------------------------------------------------------------------------
+#OVERVIEW TAB-----------------------------------------------------------------------------------------------------
   dashboardBody(
     use_theme(TOTA_theme),
     
@@ -206,10 +206,6 @@ ui <- dashboardPage(
               class = "explore-link"
             ),
             p("View current and historical drought levels of the region."),
-            
-            
-            
-
             br()
           ),
           
@@ -231,7 +227,6 @@ ui <- dashboardPage(
                   font-weight: bold;
                   text-decoration: none;
               }
-
               .explore-link:hover {
                   text-decoration: underline;
               }"
@@ -241,7 +236,7 @@ ui <- dashboardPage(
         )
       ), 
       
-  #TEMPERATURE TAB ---------------------------------------------------------------------------------------------------------------------
+  #TEMPERATURE TAB -------------------------------------------------------------------------------------------------------------------
       tabItem(
         tabName = "temperature",
         
@@ -417,84 +412,84 @@ ui <- dashboardPage(
       ),
   
   #DROUGHT TAB ---------------------------------------------------------------------------------------------      
-    tabItem(
-      tabName = "drought",
-      
-      tags$style(HTML("
-            @media (max-width: 600px) {
-              #DroughtPlot { height: 350px !important; }
-              #DroughtHistPlot {height: 350px !important; }
-            }"
-      )),
-      
-      fluidRow(
-        box(
-          title = "Drought - How dry is the region?",
-          solidHeader = TRUE,
-          width = 12,
-          p("This dashboard brings together current and historical drought data from basins across the Thompson-Okanagan Tourism Region 
-                to support climate action and regional resilience. Drought conditions provide insight into changing water availability and 
-                the potential impacts of climate-related pressures on communities, ecosystems, and tourism. The B.C. Drought Level classification 
-                combines information about water supply and environmental conditions to indicate drought severity, helping identify emerging risks 
-                and inform sustainable water management and climate adaptation planning."),
-          style = "font-size: 18px;"
-        ),
+      tabItem(
+        tabName = "drought",
         
-        valueBoxOutput("CurrentHighest", width =4),
-        valueBoxOutput("Level3", width = 4),
-        valueBoxOutput("HighestLevel", width = 4),
+        tags$style(HTML("
+              @media (max-width: 600px) {
+                #DroughtPlot { height: 350px !important; }
+                #DroughtHistPlot {height: 350px !important; }
+              }"
+        )),
         
-        infoBox(
-          title = "Data Freshness",
-          width = 12,
-          color = "light-blue",
-          icon = icon("clock-rotate-left"),
-          value = format(max(df_drought$Date_Modified), "%b %m, %Y"),
-          subtitle = "Data is updated throughout the drought season by GeoBC."
-        ),
-        
-        box(
-          title = "Current Drought Levels within the Thompson Okanagan Tourism Region",
-          solidHeader = TRUE,
-          width = 12,
-          leafletOutput("DroughtPlot", height = 500)
-        ),
-        
-        box(
-          title = "Drought Scale",
-          solidHeader = TRUE,
-          width = 12,
-          div(
-            style = "text-align: center;",
-            tags$img(
-              src = "drought_scale.png",
-              style = "width: 75%;"
-            )
+        fluidRow(
+          box(
+            title = "Drought - How dry is the region?",
+            solidHeader = TRUE,
+            width = 12,
+            p("This dashboard brings together current and historical drought data from basins across the Thompson-Okanagan Tourism Region 
+                  to support climate action and regional resilience. Drought conditions provide insight into changing water availability and 
+                  the potential impacts of climate-related pressures on communities, ecosystems, and tourism. The B.C. Drought Level classification 
+                  combines information about water supply and environmental conditions to indicate drought severity, helping identify emerging risks 
+                  and inform sustainable water management and climate adaptation planning."),
+            style = "font-size: 18px;"
           ),
-          footer = ("Government of British Columbia. B.C. Drought Information Portal. Available at: https://droughtportal.gov.bc.ca/")
-        ),
-        
-        box(
-          title = paste0(
-            max(format(df_drought_hist$Start_Date, "%Y"), na.rm = TRUE),
-            " Drought Levels at a Glance"
+          
+          valueBoxOutput("CurrentHighest", width =4),
+          valueBoxOutput("Level3", width = 4),
+          valueBoxOutput("HighestLevel", width = 4),
+          
+          infoBox(
+            title = "Data Freshness",
+            width = 12,
+            color = "light-blue",
+            icon = icon("clock-rotate-left"),
+            value = format(max(df_drought$Date_Modified), "%b %d, %Y"),
+            subtitle = "Data is updated throughout the drought season by GeoBC."
           ),
-          solidHeader = TRUE,
-          width = 12,
-          plotOutput("DroughtHistPlot", height = 500),
-          footer = "Updated manually by TOTA."
-        ),
-        
-        box(
-          title = "References & Data",
-          solidHeader = TRUE,
-          width = 12,
-          p("Data source: Province of British Columbia. B.C. Drought Information Portal (British Columbia Drought Levels).
-                Retrieved from https://droughtportal.gov.bc.ca/datasets/f1842161d9c2454a98f9fc3b45d5d92e_27/explore?location=54.149730%2C-126.557374%2C5"),
-          p("Data source: Government of British Columbia. BC Drought Levels Time Lapse 2025. Drought Information Portal. Retrieved from https://drought-information-portal-bcgov03.hub.arcgis.com/pages/historical-drought-levels")
+          
+          box(
+            title = "Current Drought Levels within the Thompson Okanagan Tourism Region",
+            solidHeader = TRUE,
+            width = 12,
+            leafletOutput("DroughtPlot", height = 500)
+          ),
+          
+          box(
+            title = "Drought Scale",
+            solidHeader = TRUE,
+            width = 12,
+            div(
+              style = "text-align: center;",
+              tags$img(
+                src = "drought_scale.png",
+                style = "width: 75%;"
+              )
+            ),
+            footer = ("Government of British Columbia. B.C. Drought Information Portal. Available at: https://droughtportal.gov.bc.ca/")
+          ),
+          
+          box(
+            title = paste0(
+              max(format(df_drought_hist$Start_Date, "%Y"), na.rm = TRUE),
+              " Drought Levels at a Glance"
+            ),
+            solidHeader = TRUE,
+            width = 12,
+            plotOutput("DroughtHistPlot", height = 500),
+            footer = "Updated manually by TOTA."
+          ),
+          
+          box(
+            title = "References & Data",
+            solidHeader = TRUE,
+            width = 12,
+            p("Data source: Province of British Columbia. B.C. Drought Information Portal (British Columbia Drought Levels).
+                  Retrieved from https://droughtportal.gov.bc.ca/datasets/f1842161d9c2454a98f9fc3b45d5d92e_27/explore?location=54.149730%2C-126.557374%2C5"),
+            p("Data source: Government of British Columbia. BC Drought Levels Time Lapse 2025. Drought Information Portal. Retrieved from https://drought-information-portal-bcgov03.hub.arcgis.com/pages/historical-drought-levels")
+          )
         )
       )
-    )
     ),
     footer_TOTA
   )

@@ -15,7 +15,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #YOY CHANGE IN DAYS OVER 30  --------------------------------------------------------------------------------------------
+  #YOY CHANGE IN DAYS OVER 30  ---------------------------------------------------------------------------------------------
   output$YoYDaysOver30 <- renderValueBox({
     
     selected_year <- as.numeric(input$year_temp)
@@ -24,11 +24,9 @@ server <- function(input, output, session) {
       filter(year == input$year_temp, station_name == input$station) %>%
       filter(max_temp >= 30)
 
-    
     prev_period <- df_temp%>%
       filter(year == selected_year -1, station_name == input$station) %>%
       filter(max_temp >= 30)
-    
     
     if(nrow(prev_period) == 0 || nrow(current_period) == 0){
       valueBox(
@@ -52,7 +50,7 @@ server <- function(input, output, session) {
     }
   })
   
-  #VALUE BOX CHANGE IN VOLUME PROCESSED PER PERSON FROM 2013 TO CURRENT----------------------------------------------
+  #VALUE BOX CHANGE IN VOLUME PROCESSED PER PERSON FROM 2013 TO CURRENT-----------------------------------------------------
   output$ChangeSince2013<- renderValueBox({
     
     annual_heat_days <- df_temp %>%
@@ -79,7 +77,7 @@ server <- function(input, output, session) {
       )
   })
   
-  #MONLTHY TEMP OF SELECTED YEAR AND STATION -------------------------------------------------------------
+  #MONLTHY TEMP OF SELECTED YEAR AND STATION -------------------------------------------------------------------------------
   output$MonthlyTempPlot <- renderPlotly({
     
     plot_width <- session$clientData$output_MonthlyTempPlot_width
@@ -126,10 +124,11 @@ server <- function(input, output, session) {
         y = "Number of Days ≥ 30°C"
       ) +
       
+      theme_minimal()+
+      
       theme(axis.title = element_text(size = if (is_narrow) 10 else 16),
             axis.text = element_text(size = if (is_narrow) 8 else 12),
             axis.text.x = element_text(angle = if (is_narrow) 60 else 0))
-    
     
     ggplotly(plot, tooltip = "text") %>%
       layout(
@@ -147,8 +146,7 @@ server <- function(input, output, session) {
       config(displayModeBar = FALSE)
   })
   
-  
-  #DYNAMIC YEAR BOX FOR MONTHLY TEMP PLOT ---------------------------------------------------------------------------------
+  #DYNAMIC YEAR BOX FOR MONTHLY TEMP PLOT ----------------------------------------------------------------------------------
   output$MonthlyTempPlotBox <- renderUI({
     box(
       title = paste0("Monthly Number of Days ≥ 30°C - ", input$station, ", ", input$year_temp),
@@ -158,7 +156,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #ALL STATIONS 2013-CURRENT NUMBER OF HOT DAYS EACH YEAR ---------------------------------------------------------------------
+  #ALL STATIONS 2013-CURRENT NUMBER OF HOT DAYS EACH YEAR ------------------------------------------------------------------
   output$AllCitiesPlot <- renderPlotly({
     
     plot_width <- session$clientData$output_AllCitiesPlot_width
@@ -177,7 +175,7 @@ server <- function(input, output, session) {
         fill = list(days = 0)
       )
     
-   plot <-  ggplot(df_hot_days, aes(x = year, y = days, fill = days, text = paste0("<b>Hot Days: </b>", days))) +
+    plot <-  ggplot(df_hot_days, aes(x = year, y = days, fill = days, text = paste0("<b>Hot Days: </b>", days))) +
       
       geom_col(width = 0.3) +
       
@@ -299,7 +297,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #MAP OF FIRES FILTERED BY YEAR ---------------------------------------------------------------------------------------
+  #MAP OF FIRES FILTERED BY YEAR -------------------------------------------------------------------------------------------
   output$fireMapPlot <- renderLeaflet({
     
     plot_width <- session$clientData$output_FireMapPlot_width
@@ -321,8 +319,7 @@ server <- function(input, output, session) {
                            fill = FALSE,
                            color = "#D11B4A",
                            weight = 2,
-                           opacity = 1
-    )
+                           opacity = 1)
     
     m_markers <- addCircleMarkers(m_bound,
                                     data = df_fire_filtered,
@@ -347,11 +344,10 @@ server <- function(input, output, session) {
         title = "",
         opacity = 1
       )
-
     setView(m_markers, lng = -118.196086, lat = 50.998195, zoom = 6)
   })
   
-  #DYNAMIC OUTPUT BOX FOR FIRE MAP PLOT -----------------------------------------------------------------------------
+  #DYNAMIC OUTPUT BOX FOR FIRE MAP PLOT ------------------------------------------------------------------------------------
   output$fireMapPlotBox <- renderUI({
     box(
       title = paste0("Wildfire map - ", input$year_fire),
@@ -361,7 +357,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #MONTHLY FIRE START/SEASONAL TIMING LINE CHART ---------------------------------------------------------------------
+  #MONTHLY FIRE START/SEASONAL TIMING LINE CHART ---------------------------------------------------------------------------
   output$MonthlyFirePlot <- renderPlotly({
     
     plot_width <- session$clientData$output_MonthlyFirePlot_width
@@ -405,11 +401,12 @@ server <- function(input, output, session) {
         y = "Number of Wildfires"
       ) +
       
+      theme_minimal()+
+      
       theme(axis.title = element_text(size = if (is_narrow) 10 else 16),
             axis.text = element_text(size = if (is_narrow) 8 else 12),
             axis.text.x = element_text(angle = if (is_narrow) 60 else 0))
 
-    
     ggplotly(plot, tooltip = "text") %>%
       layout(
         # margin = list(t = 30, r = 0, b = 50, l = 70),
@@ -427,7 +424,7 @@ server <- function(input, output, session) {
       config(displayModeBar = FALSE)
   })
   
-  #DYNAMIC OUTPUT BOX FOR MONTHLY FIRE PLOT ----------------------------------------------------------------------------
+  #DYNAMIC OUTPUT BOX FOR MONTHLY FIRE PLOT --------------------------------------------------------------------------------
   output$MonthlyFirePlotBox <- renderUI({
     box(
       title = paste0("Seasonal Timing of Wildfire Activity - ", input$year_fire),
@@ -437,10 +434,9 @@ server <- function(input, output, session) {
     )
   })
   
-  #DROUGHT TAB ========================================================================================================= 
-  #VALUE BOX OF HIGHEST DROUGHT LEVEL THIS WEEK ----------------------------------------------------------------------
+  #DROUGHT TAB ============================================================================================================= 
+  #VALUE BOX OF HIGHEST DROUGHT LEVEL THIS WEEK ----------------------------------------------------------------------------
   output$CurrentHighest <- renderValueBox({
-    
     valueBox(
       value = max(df_drought$DroughtLevel),
       subtitle = paste0("Highest drought level for latest reporting: ", format(max(df_drought$Date_Modified), "%b %m, %Y")),
@@ -449,7 +445,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #VALUE BOX OF BASINS EXPERIENCING SEVERE DROUGHT -------------------------------------------------------------------
+  #VALUE BOX OF BASINS EXPERIENCING SEVERE DROUGHT -------------------------------------------------------------------------
   output$Level3 <- renderValueBox({
     
     df_drought_hist_filtered <- df_drought_hist %>%
@@ -463,7 +459,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #VALUE BOX OF HIGHEST DROUGHT LEVEL REACHED -----------------------------------------------------------------------
+  #VALUE BOX OF HIGHEST DROUGHT LEVEL REACHED ------------------------------------------------------------------------------
   output$HighestLevel <- renderValueBox({
     
     df_drought_hist_filtered <- df_drought_hist %>%
@@ -477,7 +473,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #DROUGHT MAP OF THOMPSON OKANAGAN REGION ---------------------------------------------------------------------------
+  #DROUGHT MAP OF THOMPSON OKANAGAN REGION ---------------------------------------------------------------------------------
   output$DroughtPlot <- renderLeaflet({
     
     pal <- colorFactor(
@@ -487,10 +483,15 @@ server <- function(input, output, session) {
         "#F5C361",  # 2
         "#E38A2A",  # 3
         "#D71B22",  # 4
-        "#800A0C"   # 5
+        "#800A0C"  # 5
+        # Not updated outside of core drought season
       ),
       domain = c(0, 1, 2, 3, 4, 5)
     )
+    df_drought <- df_drought %>%
+      mutate(
+        DroughtLevel = if_else(DroughtLevel == 99, "Not updated outside of core drought season.", as.character(DroughtLevel))
+      )
     
     m_base <- leaflet(data = df_drought)
     
@@ -504,16 +505,15 @@ server <- function(input, output, session) {
       color = "black",
       popup = ~paste0(
         "<b>", BasinName, "</b><br>",
-        "Current Drought Level: ", DroughtLevel
-      )
+        "Current Drought Level: ", DroughtLevel)
     ) %>%      
-      addPolygons( # Add tourism region
+    addPolygons( # Add tourism region
         data = df_TO_boundary,
         fill = FALSE,
         color = "#004B55",
         weight = 2,
         opacity = 1
-      )
+    )
     
     m_legend <- addLegend(
       map = m_ploy,
@@ -525,15 +525,14 @@ server <- function(input, output, session) {
       addLegend(
         "bottomright",
         pal = pal,
-        values = c(0, 1, 2, 3, 4, 5),
+        values = c(0, 1, 2, 3, 4, 5, paste0("Not updated outside of <br> core drought season")),
         title = "Drought Level",
         opacity = 1
       )
-    
     setView(m_legend, lng = -120.34, lat = 50.98, zoom = 6)
   })
   
-  #DROUGHT TABLE -----------------------------------------------------------------------------------------------------
+  #DROUGHT TABLE -----------------------------------------------------------------------------------------------------------
   output$DroughtTable <- renderUI({
     
     tags$table(
@@ -553,14 +552,13 @@ server <- function(input, output, session) {
             tags$td(df_drought$BasinName[i]),
             tags$td(df_drought$DroughtLevel[i]),
             tags$td(format(df_drought$Date_Modified[i], "%b %m, %Y"))
-            
           )
         })
       )
     )
   })
   
-  #DROUGHT HISTORY HEATMAP TABLE -- Data needs to be manually updated in the google sheet ----------------------------
+  #DROUGHT HISTORY HEATMAP TABLE -- Data needs to be manually updated in the google sheet ----------------------------------
   output$DroughtHistPlot <- renderPlot({
     
     plot_width <- session$clientData$output_DroughtHistPlot_width
@@ -666,26 +664,19 @@ server <- function(input, output, session) {
         ),
         
         panel.grid = element_blank(),
-        
         legend.position = if (is_narrow) "bottom" else "top",
         legend.direction = "horizontal",
         legend.location = "plot",
         legend.justification = "left",
         plot.margin = margin(t = 5, r = 10, b = 5, l = 0),
-        
-        legend.title = element_text(
-          size = if (is_narrow) 8 else 16
-        ),
-        
-        legend.text = element_text(
-          size = if (is_narrow) 8 else 14
-        )
+        legend.title = element_text(size = if (is_narrow) 8 else 16),
+        legend.text = element_text(size = if (is_narrow) 8 else 14)
       ) 
   })
   
-  #OVERVIEW PAGE =======================================================================================================
+  #OVERVIEW PAGE ===========================================================================================================
   
-  #CLICKABLE LINK FOR DISPOSAL RATE TAB --------------------------------------------------------------------------------
+  #CLICKABLE LINK FOR DISPOSAL RATE TAB ------------------------------------------------------------------------------------
   observeEvent(input$drought_link, {
     updateTabItems(session, "tabs", "drought")
   })
