@@ -13,6 +13,7 @@ library(jsonlite)
 library(plotly)
 library(tidyr)
 library(lubridate)
+library(rsconnect)
 
 source("R/data_helpers.R")
 
