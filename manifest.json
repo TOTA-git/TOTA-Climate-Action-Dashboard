@@ -824,7 +824,7 @@
     },
     "crul": {
       "Source": "CRAN",
-      "Repository": "https://ropensci.r-universe.dev",
+      "Repository": "https://cran.rstudio.com",
       "description": {
         "Package": "crul",
         "Title": "HTTP Client",
@@ -2180,6 +2180,40 @@
         "RemoteRef": "lubridate",
         "RemoteRepos": "https://cran.rstudio.com",
         "RemoteSha.Version": "1.9.5"
+      }
+    },
+    "lutz": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "lutz",
+        "Type": "Package",
+        "Title": "Look Up Time Zones of Point Coordinates",
+        "Version": "0.3.2",
+        "Authors@R": "c(\n      person(\"Andy\", \"Teucher\", email = \"andy.teucher@gmail.com\", role = c(\"aut\", \"cre\"), \n             comment = c(ORCID = \"0000-0002-7840-692X\")),\n      person(\"Bob\", \"Rudis\", email = \"bob@rud.is\", role = c(\"ctb\"), \n             comment = c(ORCID = \"0000-0001-5670-2640\"))\n    )",
+        "Description": "Input latitude and longitude values or an 'sf/sfc' POINT \n    object and get back the time zone in which they exist. Two methods are implemented. \n    One is very fast and uses 'Rcpp' in conjunction with data from the 'Javascript' library\n    (<https://github.com/darkskyapp/tz-lookup-oss/>). This method also works outside of countries' \n    borders and in international waters, however speed comes at the cost of accuracy - near time \n    zone borders away from populated centres there is a chance that it will return the incorrect\n    time zone. The other method is slower but more accurate - it uses the 'sf' package to intersect \n    points with a detailed map of time zones from here: \n    <https://github.com/evansiroky/timezone-boundary-builder/>. The package also \n    contains several utility functions for helping to understand and visualize \n    time zones, such as listing of world time zones, including information about \n    daylight savings times and their offsets from UTC. You can also plot a \n    time zone to visualize the UTC offset over a year and when daylight savings \n    times are in effect.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://andyteucher.ca/lutz/, https://github.com/ateucher/lutz",
+        "BugReports": "https://github.com/ateucher/lutz/issues",
+        "Depends": "R (>= 3.2)",
+        "Imports": "stats, Rcpp, lubridate",
+        "Suggests": "testthat (>= 2.1.0), sf (>= 0.7), sp, datasets, covr, ggplot2",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.2.3",
+        "LinkingTo": "Rcpp",
+        "NeedsCompilation": "yes",
+        "Packaged": "2023-10-17 20:03:48 UTC; andy",
+        "Author": "Andy Teucher [aut, cre] (<https://orcid.org/0000-0002-7840-692X>),\n  Bob Rudis [ctb] (<https://orcid.org/0000-0001-5670-2640>)",
+        "Maintainer": "Andy Teucher <andy.teucher@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2023-10-17 20:30:02 UTC",
+        "Built": "R 4.6.1; x86_64-w64-mingw32; 2026-10-28 03:46:56 UTC; windows",
+        "Archs": "x64",
+        "RemoteType": "standard",
+        "RemotePkgRef": "lutz",
+        "RemoteRef": "lutz",
+        "RemoteRepos": "https://cran.rstudio.com",
+        "RemoteSha.Version": "0.3.2"
       }
     },
     "magrittr": {
@@ -3917,15 +3951,15 @@
       }
     },
     "weathercan": {
-      "Source": "ropensci",
-      "Repository": "https://ropensci.r-universe.dev",
+      "Source": "github",
+      "Repository": null,
       "description": {
         "Package": "weathercan",
         "Type": "Package",
         "Title": "Download Weather Data from Environment and Climate Change Canada",
         "Version": "1.0.1",
         "Authors@R": "c(\n     person(\"Steffi\", \"LaZerte\", email = \"sel@steffilazerte.ca\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-7690-8360\")),\n     person(\"Sam\", \"Albers\", email = \"sam.albers@gmail.com\", role = c(\"aut\"), comment = c(ORCID = \"0000-0002-9270-7884\")),\n     person(\"Nick\", \"Brown\", email = \"nicholas512@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0002-2719-0671\")),\n     person(\"Kevin\", \"Cazelles\", email = \"kevin.cazelles@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0001-6619-9874\")),\n     person(\"Richard\", \"Littauer\", email = \"richard.littauer@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0001-5428-7535\")),\n     person(\"Shandiya\", \"Balasubramaniam\", role = \"ctb\", comment = c(ORCID = \"0000-0001-9928-9964\")),\n     person(\"Mark\", \"Ciechanowski\", role = \"ctb\", comment = c(ORCID = \"0000-0002-3732-5939\")),\n     person(\"Jeremy\", \"Selva\", email = \"jeremy1189.jjs@gmail.com\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4498-2662\")),\n     person(c(\"Kelli\", \"F.\"), \"Johnson\", email = \"kelli.johnson@noaa.gov\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0002-5149-451X\")),\n     person(\"Russ\", \"Allen\", email = \"mbr@historicip.com\", role = c(\"ctb\")),\n     person(\"Everett\", \"Snieder\", email = \"everett.snieder@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0003-4997-3404\")),\n     person(\"Josh\", \"Persi\", email = \"joshpersi@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0002-2700-6483\")),\n     person(\"Mahjabin\", \"Oyshi\", email = \"oyshimahjabin3@gmail.com\", role = c(\"ctb\"), comment = c(ORCID = \"0009-0000-7992-6727\"))\n     )",
-        "Description": "Provides means for downloading historical weather data\n        from the Environment and Climate Change Canada website\n        (<https://climate.weather.gc.ca/historical_data/search_historic_data_e.html>).\n        Data can be downloaded from multiple stations and over large\n        date ranges and automatically processed into a single dataset.\n        Tools are also provided to identify stations either by name or\n        proximity to a location.",
+        "Description": "Provides means for downloading historical weather data from \n    the Environment and Climate Change Canada website \n    (<https://climate.weather.gc.ca/historical_data/search_historic_data_e.html>). \n    Data can be downloaded from multiple stations and over large date ranges \n    and automatically processed into a single dataset. Tools are also provided \n    to identify stations either by name or proximity to a location.",
         "License": "GPL-3",
         "Language": "en-CA",
         "BugReports": "https://github.com/ropensci/weathercan/issues/",
@@ -3939,17 +3973,21 @@
         "VignetteBuilder": "knitr",
         "Encoding": "UTF-8",
         "Config/testthat/edition": "3",
-        "Config/pak/sysreqs": "libicu-dev libssl-dev libx11-dev",
-        "Repository": "https://ropensci.r-universe.dev",
-        "Date/Publication": "2026-08-31 15:31:44 UTC",
-        "RemoteUrl": "https://github.com/ropensci/weathercan",
-        "RemoteRef": "main",
+        "RemoteType": "github",
+        "RemoteHost": "api.github.com",
+        "RemoteRepo": "weathercan",
+        "RemoteUsername": "ropensci",
+        "RemoteRef": "7869a45c4ca551c1160bed16d312e4361bd0e2d4",
         "RemoteSha": "7869a45c4ca551c1160bed16d312e4361bd0e2d4",
+        "GithubRepo": "weathercan",
+        "GithubUsername": "ropensci",
+        "GithubRef": "7869a45c4ca551c1160bed16d312e4361bd0e2d4",
+        "GithubSHA1": "7869a45c4ca551c1160bed16d312e4361bd0e2d4",
         "NeedsCompilation": "no",
-        "Packaged": "2026-09-30 12:44:09 UTC; root",
+        "Packaged": "2026-11-09 18:30:06 UTC; Alexis Stamp",
         "Author": "Steffi LaZerte [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-7690-8360>),\n  Sam Albers [aut] (ORCID: <https://orcid.org/0000-0002-9270-7884>),\n  Nick Brown [ctb] (ORCID: <https://orcid.org/0000-0002-2719-0671>),\n  Kevin Cazelles [ctb] (ORCID: <https://orcid.org/0000-0001-6619-9874>),\n  Richard Littauer [ctb] (ORCID: <https://orcid.org/0000-0001-5428-7535>),\n  Shandiya Balasubramaniam [ctb] (ORCID:\n    <https://orcid.org/0000-0001-9928-9964>),\n  Mark Ciechanowski [ctb] (ORCID:\n    <https://orcid.org/0000-0002-3732-5939>),\n  Jeremy Selva [ctb] (ORCID: <https://orcid.org/0000-0002-4498-2662>),\n  Kelli F. Johnson [ctb] (ORCID: <https://orcid.org/0000-0002-5149-451X>),\n  Russ Allen [ctb],\n  Everett Snieder [ctb] (ORCID: <https://orcid.org/0000-0003-4997-3404>),\n  Josh Persi [ctb] (ORCID: <https://orcid.org/0000-0002-2700-6483>),\n  Mahjabin Oyshi [ctb] (ORCID: <https://orcid.org/0009-0000-7992-6727>)",
         "Maintainer": "Steffi LaZerte <sel@steffilazerte.ca>",
-        "Built": "R 4.6.1; ; 2026-09-30 12:45:43 UTC; windows"
+        "Built": "R 4.6.1; ; 2026-11-09 18:30:08 UTC; windows"
       }
     },
     "withr": {
@@ -4157,6 +4195,9 @@
     }
   },
   "files": {
+    ".github/workflows/refresh_data.yml": {
+      "checksum": "9be50dc9a0a8441efb84e3c7a173f057"
+    },
     ".Renviron": {
       "checksum": "ffc80c883464fb022c89d1ca0cb55ac7"
     },
@@ -4164,19 +4205,22 @@
       "checksum": "a1746285bbbbee90d50611352ce61f7a"
     },
     "data/cache/drought.rds": {
-      "checksum": "1556ef9c676eeabcabcf92c7d5d214a2"
+      "checksum": "756364e3849ebdb025ba97f077be2bc1"
     },
     "data/cache/drought_hist.csv": {
       "checksum": "3cebec554981a5c071fd7a4cd2504e53"
     },
+    "data/cache/drought_test.rds": {
+      "checksum": "756364e3849ebdb025ba97f077be2bc1"
+    },
     "data/cache/refresh_log.csv": {
-      "checksum": "16239320422a0493bdf1a111ef02ba3a"
+      "checksum": "598aa4e257864ee0ea4e32cc1b91510f"
     },
     "data/cache/temperature.csv": {
-      "checksum": "c1ecffa82ae5f6de723dc17a13242224"
+      "checksum": "ee93cabc535c5e34af110c38c0884907"
     },
     "data/cache/wildfire.rds": {
-      "checksum": "8ee8a4ac4cf2aba3e3b3fa2a173105ea"
+      "checksum": "0479a9a128ba0d058444403b23d543d8"
     },
     "data/cache/wildfires/BC Fire Points 2022-2024.kmz": {
       "checksum": "56bf7280be5266088c0544375a35d8eb"
@@ -4197,7 +4241,7 @@
       "checksum": "58144c25c8faf0c2349ee98a58095d92"
     },
     "data_refresh.R": {
-      "checksum": "24d75669c87f33904874c54a24d7b3e9"
+      "checksum": "9e67b1fb5d71c5fccf817a9b0efb4462"
     },
     "global.R": {
       "checksum": "ba909a16fa0606d962dfba72bef4a597"
@@ -4209,10 +4253,10 @@
       "checksum": "f1763ce3d54c919ec7cc7e49e377616c"
     },
     "server.R": {
-      "checksum": "0709cdae98f3a4d20e5c62e16278f028"
+      "checksum": "8765e9c887379413a995012d3b34bc60"
     },
     "ui.R": {
-      "checksum": "da3512a7c1175d7094b06f0b9f11e50e"
+      "checksum": "f471392e270204d32ad86a315ed453cf"
     },
     "www/banner.png": {
       "checksum": "ec169342b5cc2823ac48b64df3db88ad"
