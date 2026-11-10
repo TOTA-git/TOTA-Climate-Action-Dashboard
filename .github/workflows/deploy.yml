@@ -31,6 +31,12 @@ jobs:
             libssl-dev \
             libxml2-dev
 
+      # Installs all R packages needed
+      - name: Install R Package Dependencies
+        run: |
+          Rscript -e 'install.packages(c("bcmaps","bslib", "dplyr", "fresh", "geojsonsf", "ggplot2", "httr", "leaflet", "lubridate", "lutz","plotly", "purrr", "readr", "readxl", "rvest", "scales", "sf", "shiny", "shinydashboard", "stringr", "tidyr"))
+          Rscript -e 'install.packages("weathercan", repos = c("https://ropensci.r-universe.dev", "https://cloud.r-project.org"))'
+
       - name: Install rsconnect
         run: |
           Rscript -e '
