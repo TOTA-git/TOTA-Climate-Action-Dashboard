@@ -30,13 +30,7 @@ jobs:
             libcurl4-openssl-dev \
             libssl-dev \
             libxml2-dev
-
-      # Installs all R packages needed
-      - name: Install R Package Dependencies
-        run: |
-          Rscript -e 'install.packages(c("remotes","bcmaps","bslib", "dplyr", "fresh", "geojsonsf", "ggplot2", "httr", "leaflet", "lubridate", "lutz","plotly", "purrr", "readr", "readxl", "rvest", "scales", "sf", "shiny", "shinydashboard", "stringr", "tidyr"))'
-          Rscript -e 'remotes::install_github("ropensci/weathercan@7869a45c4ca551c1160bed16d312e4361bd0e2d4")'
-
+          
       - name: Install rsconnect
         run: |
           Rscript -e '
@@ -47,6 +41,23 @@ jobs:
             )
 
             packageVersion("rsconnect")
+          '
+          
+      # Installs all R packages needed
+      - name: Install R Package Dependencies
+        run: |
+          Rscript -e 'install.packages(c("remotes","bcmaps","bslib", "dplyr", "fresh", "geojsonsf", "ggplot2", "httr", "leaflet", "lubridate", "lutz","plotly", "purrr", "readr", "readxl", "rvest", "scales", "sf", "shiny", "shinydashboard", "stringr", "tidyr"))'
+
+      - name: Install R Package Dependencies
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          Rscript -e '
+            install.packages("remotes")
+
+            remotes::install_github(
+              "ropensci/weathercan@7869a45c4ca551c1160bed16d312e4361bd0e2d4"
+            )
           '
 
       - name: Authenticate and deploy to tota2
