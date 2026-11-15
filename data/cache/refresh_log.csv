@@ -1,5 +1,5 @@
 dataset,timestamp,status,n_rows,message
-drought,2026-11-14 21:43:17,success,7,NA
-drought_hist,2026-11-14 21:43:17,success,175,NA
-wildfire,2026-11-14 21:43:39,success,819,NA
-temperature,2026-11-14 21:43:50,success,20260,NA
+drought,2026-11-15 22:08:14,success,7,NA
+drought_hist,2026-11-15 22:08:15,success,175,NA
+wildfire,2026-11-15 22:08:35,success,819,NA
+temperature,2026-11-15 22:08:51,success,20264,NA
