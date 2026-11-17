@@ -437,12 +437,24 @@ server <- function(input, output, session) {
   #DROUGHT TAB ============================================================================================================= 
   #VALUE BOX OF HIGHEST DROUGHT LEVEL THIS WEEK ----------------------------------------------------------------------------
   output$CurrentHighest <- renderValueBox({
-    valueBox(
-      value = max(df_drought$DroughtLevel),
-      subtitle = paste0("Highest drought level for latest reporting: ", format(max(df_drought$Date_Modified), "%b %m, %Y")),
-      icon = icon("hand-holding-droplet"),
-      color = "orange"
-    )
+    
+    max_level <- max(df_drought$DroughtLevel)
+    
+    if (max_level > 5) {
+      valueBox(
+        value = "-",
+        subtitle = "Not updated outside of core drought season.",
+        icon = icon("hand-holding-droplet"),
+        color = "orange"
+      )
+    } else {
+      valueBox(
+        value = max(df_drought$DroughtLevel),
+        subtitle = paste0("Highest drought level for latest reporting: ", format(max(df_drought$Date_Modified), "%b %m, %Y")),
+        icon = icon("hand-holding-droplet"),
+        color = "orange"
+      )
+    }
   })
   
   #VALUE BOX OF BASINS EXPERIENCING SEVERE DROUGHT -------------------------------------------------------------------------
