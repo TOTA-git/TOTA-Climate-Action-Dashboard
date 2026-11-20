@@ -688,7 +688,7 @@ server <- function(input, output, session) {
   
   #OVERVIEW PAGE ===========================================================================================================
   
-  #CLICKABLE LINK FOR DISPOSAL RATE TAB ------------------------------------------------------------------------------------
+  #CLICKABLE LINKS ------------------------------------------------------------------------------------
   observeEvent(input$drought_link, {
     updateTabItems(session, "tabs", "drought")
   })
