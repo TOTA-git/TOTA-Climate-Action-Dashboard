@@ -71,7 +71,7 @@ server <- function(input, output, session) {
       
       valueBox(
         value = if (trend >= 0) paste0("+", round(trend, 2), " days/year") else paste0(round(trend, 2), " days/year"),
-        subtitle = paste0("Annual increase in days ≥ 30°C, ", min(annual_heat_days$year), "–", max(annual_heat_days$year), " - ", input$station),
+        subtitle = paste0("Annual trend in days ≥ 30°C, ", min(annual_heat_days$year), "–", max(annual_heat_days$year), " - ", input$station),
         icon = if (trend > 0) icon("arrow-up") else if (trend == 0) icon("minus") else icon("arrow-down"),
         color = "orange"
       )

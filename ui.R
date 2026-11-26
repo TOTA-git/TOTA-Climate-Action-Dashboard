@@ -178,7 +178,7 @@ ui <- dashboardPage(
             h2("What is Climate Action?"),
             
             p("Climate action involves measuring and reducing greenhouse gas emissions and strengthening the capacity to adapt to 
-              climate-related impacts such as drought, extreme heat, wildfires, and flooding. In the Thompson-Okanagan, climate 
+              climate-related impacts such as drought, extreme heat, and wildfires. In the Thompson-Okanagan, climate 
               action is particularly relevant to understanding how climate change affects tourism infrastructure, outdoor recreation,
               water availability, and the long-term resilience of tourism businesses and communities. Monitoring these indicators 
               supports informed decision-making and helps destinations identify opportunities to reduce emissions and build climate resilience."),
@@ -364,9 +364,9 @@ ui <- dashboardPage(
             width = 12,
             color = "light-blue",
             icon = icon("info-circle"),
-            subtitle = "B.C.'s wildfire year officially starts on April 1 and runs through March 31 of the following calendar year. 
+            subtitle = p("B.C.'s wildfire year officially starts on April 1 and runs through March 31 of the following calendar year. 
               Wildfires in B.C. can burn across multiple years, including through the winter. These are called overwintering fires. 
-              For example, a fire might ignite in summer 2025, smoulder underground through winter, and become active again in 2026."
+              For example, a fire might ignite in summer 2025, smoulder underground through winter, and become active again in 2026.", style = "font-size: 16px")
           ),
           
           infoBox(
